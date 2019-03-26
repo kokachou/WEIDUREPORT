@@ -13,7 +13,6 @@ from report.pp_temp import disc, disc_parse,disc_extent
 from report.hn_temp import need_type, consistency
 from report.ca_temp import index_desc,disposal_data,dis_data, index_desc_ygzwts
 from report.bh_transfer import bh_desc
-# from report.zydx import zd_desc, fz_desc,sub
 from report.zydx import zd_desc, fz_desc,sub,desc_zydx,desc_fu
 from operator import itemgetter
 from report.zgc180 import zxt, desc_beharvior,jy
@@ -21,7 +20,6 @@ from report.zgc180 import zxt, desc_beharvior,jy
 
 WORD_DOCUMENT_MAP = {}
 
-# WORD_chart_MAP = {}
 hm_template_list = []
 hm_template_list_en = []
 pp_template_list = []
@@ -34,7 +32,6 @@ def parse_data(word_id, d, people_result_id):
     if word_id == 'PsychologicalCapital':
         sourceResDir = os.getcwd() + os.sep +"report/"+ "%s/" % word_id
         print(sourceResDir)
-        # print(word_id)
         if word_id not in WORD_DOCUMENT_MAP:
             print("read document from disk-------------------------------------")
             path = sourceResDir + 'word/document.xml'
@@ -101,37 +98,21 @@ def parse_data(word_id, d, people_result_id):
         document_xml = document_xml.replace('%Validation%', d['detail']['report_data']['msg']['Validation'])
         document_xml = document_xml.replace('%ContentAdvantageFeature%', d['detail']['report_data']['msg']['ContentAdvantageFeature'])
         document_xml = document_xml.replace('%ContentWeakFeature%', d['detail']['report_data']['msg']['ContentWeakFeature'])
-        # document_xml = document_xml.replace('%jinqu%', '进取性详细解释')
-        document_xml = document_xml.replace('%jinqu%', d['detail']['report_data']['msg']['ContentMotivationdDescription'][0]['Aggressive'])
-        # document_xml = document_xml.replace('%zhipei%', '支配性详细解释')
+        document_xml = document_xml.replace('%jinqu%', d['detail']['report_data']['msg']['ContentMotivationdDescription'][0]['Aggressive']))
         document_xml = document_xml.replace('%zhipei%', d['detail']['report_data']['msg']['ContentMotivationdDescription'][1]['Dominance'])
-        # document_xml = document_xml.replace('%qinhe%', '亲和性详细解释')
         document_xml = document_xml.replace('%qinhe%', d['detail']['report_data']['msg']['ContentMotivationdDescription'][2]['Affinity'])
-        # document_xml = document_xml.replace('%kaifang%', '开放性详细解释')
-        document_xml = document_xml.replace('%kaifang%', d['detail']['report_data']['msg']['ChartDataCognitionDescription'][0]['Openness'])
-        # document_xml = document_xml.replace('%leguan%', '乐观性详细解释')
+        document_xml = document_xml.replace('%kaifang%', d['detail']['report_data']['msg']['ChartDataCognitionDescription'][0]['Openness'])        
         document_xml = document_xml.replace('%leguan%', d['detail']['report_data']['msg']['ChartDataCognitionDescription'][1]['Optimistic'])
-        # document_xml = document_xml.replace('%biantong%', '变通性详细解释')
         document_xml = document_xml.replace('%biantong%', d['detail']['report_data']['msg']['ChartDataCognitionDescription'][2]['Workability'])
-        # document_xml = document_xml.replace('%neixing%', '内省性详细解释')
         document_xml = document_xml.replace('%neixing%', d['detail']['report_data']['msg']['ChartDataCognitionDescription'][3]['Introspective'])
-        # document_xml = document_xml.replace('%duli%', '独立性详细解释')
         document_xml = document_xml.replace('%duli%', d['detail']['report_data']['msg']['ContentWillDescription'][0]['Independence'])
-        # document_xml = document_xml.replace('%jianren%', '坚韧性详细解释')
         document_xml = document_xml.replace('%jianren%', d['detail']['report_data']['msg']['ContentWillDescription'][1]['Resilience'])
-        # document_xml = document_xml.replace('%zilv%', '自律性详细解释')
         document_xml = document_xml.replace('%zilv%', d['detail']['report_data']['msg']['ContentWillDescription'][2]['SelfDiscipline'])
-        # document_xml = document_xml.replace('%yuena%', '悦纳性详细解释')
         document_xml = document_xml.replace('%yuena%', d['detail']['report_data']['msg']['ContentMoodDescription'][0]['Acceptability'])
-        # document_xml = document_xml.replace('%wending%', '稳定性详细解释')
         document_xml = document_xml.replace('%wending%', d['detail']['report_data']['msg']['ContentMoodDescription'][1]['Stability'])
-        # document_xml = document_xml.replace('%zixin%', '自信性详细解释')
         document_xml = document_xml.replace('%zixin%', d['detail']['report_data']['msg']['ContentMoodDescription'][2]['SelfConfidence'])
-        # document_xml = document_xml.replace('%jinze%', '尽责性详细解释')
         document_xml = document_xml.replace('%jinze%', d['detail']['report_data']['msg']['ContentTaskDescription'][0]['Responsibility'])
-        # document_xml = document_xml.replace('%rongren%', '容人性详细解释')
         document_xml = document_xml.replace('%rongren%', d['detail']['report_data']['msg']['ContentPeopleDescription'][0]['Tolerance'])
-        # document_xml = document_xml.replace('%lita%', '利他性详细解释')
         document_xml = document_xml.replace('%lita%', d['detail']['report_data']['msg']['ContentPeopleDescription'][1]['Altruism'])
         path = dstResDir + 'word/document.xml'
         # 写入修改后的word/document.xml
@@ -311,7 +292,6 @@ def parse_data(word_id, d, people_result_id):
                 global a13
                 a13 = f.read()
 
-        # dstResDir = os.getcwd() + os.sep + "tool/%s/%s/%s/" % (t, d['msg']['Name'], word_id)
         dstResDir = os.getcwd() + os.sep + "word_parse/%s/%s/%s/" % (t, people_result_id, word_id)
         # 复制目录，olddir和newdir都只能是目录，且newdir必须不存在
         if os.path.exists(dstResDir):
@@ -1076,221 +1056,6 @@ def parse_data(word_id, d, people_result_id):
             word_path = word_path = word_to_pdf(word_and_pdf_path)
         return word_path
 
-    # if word_id == 'ProfessionalPpersonalit':
-    #     sourceResDir = os.getcwd() + os.sep + "report/" + "%s/" % word_id
-    #     # sourceResDir = os.getcwd() + os.sep + "%s/" % word_id
-    #     print(sourceResDir)
-    #     # print(word_id)
-    #     if word_id not in WORD_DOCUMENT_MAP:
-    #         print("read document from disk-------------------------------------")
-    #         path = sourceResDir + 'word/document.xml'
-    #         # s  document.xml
-    #         with open(path, 'r', encoding="UTF-8") as f:
-    #             s = f.read()
-    #         WORD_DOCUMENT_MAP[word_id] = s
-    #
-    #         # b1 chart1.xml
-    #         path1 = sourceResDir + 'word/charts/chart1.xml'
-    #         with open(path1, 'r', encoding="UTF-8") as f:
-    #             global b1
-    #             b1 = f.read()
-    #
-    #         # b2 chart2.xml
-    #         path2 = sourceResDir + 'word/charts/chart2.xml'
-    #         with open(path2, 'r', encoding="UTF-8") as f:
-    #             global b2
-    #             b2 = f.read()
-    #
-    #         # b3 chart3.xml
-    #         path3 = sourceResDir + 'word/charts/chart3.xml'
-    #         with open(path3, 'r', encoding="UTF-8") as f:
-    #             global b3
-    #             b3 = f.read()
-    #
-    #         # b4 chart4.xml
-    #         path4 = sourceResDir + 'word/charts/chart4.xml'
-    #         with open(path4, 'r', encoding="UTF-8") as f:
-    #             global b4
-    #             b4 = f.read()
-    #
-    #     dstResDir = os.getcwd() + os.sep + "word_parse/%s/%s/%s/" % (t, people_result_id,word_id)
-    #     # 复制目录，olddir和newdir都只能是目录，且newdir必须不存在
-    #     if os.path.exists(dstResDir):
-    #         print(dstResDir, '存在先删除')
-    #         shutil.rmtree(dstResDir)
-    #     print('拷贝资源文件夹开始...')
-    #     shutil.copytree(sourceResDir, dstResDir)
-    #     print('拷贝资源文件夹结束！\n')
-    #     document_xml = WORD_DOCUMENT_MAP[word_id]
-    #     document_xml = document_xml.replace('%n%', d['detail']['report_data']['msg']['Name'])
-    #     document_xml = document_xml.replace('%s%', d['detail']['report_data']['msg']['Sex'])
-    #     document_xml = document_xml.replace('%a%', str(d['detail']['report_data']['msg']['Age']))
-    #     d1 = d['detail']['report_data']['msg']['ChartSelfImage_Indicator']
-    #     document_xml = document_xml.replace('%ContentDBCofSelfImage%', disc_parse(d1)[0])
-    #     document_xml = document_xml.replace('%ContentBehavioralCharacte%', disc_parse(d1)[1])
-    #     document_xml = document_xml.replace('%ContentAdvantagesandWeaknesses%', disc_parse(d1)[2])
-    #     document_xml = document_xml.replace('%ContentCommunicationStyle%', disc_parse(d1)[3])
-    #
-    #     document_xml = document_xml.replace('%sd%', str(d['detail']['report_data']['msg']['ChartSelfImage_Indicator'][0]['score']))
-    #     document_xml = document_xml.replace('%si%', str(d['detail']['report_data']['msg']['ChartSelfImage_Indicator'][1]['score']))
-    #     document_xml = document_xml.replace('%ss%', str(d['detail']['report_data']['msg']['ChartSelfImage_Indicator'][2]['score']))
-    #     document_xml = document_xml.replace('%sc%', str(d['detail']['report_data']['msg']['ChartSelfImage_Indicator'][3]['score']))
-    #
-    #     document_xml = document_xml.replace('%s3d%', str(d['detail']['report_data']['msg']['ChartSelfImage_Indicator'][0]['score']))
-    #     document_xml = document_xml.replace('%s3i%', str(d['detail']['report_data']['msg']['ChartSelfImage_Indicator'][1]['score']))
-    #     document_xml = document_xml.replace('%s3s%', str(d['detail']['report_data']['msg']['ChartSelfImage_Indicator'][2]['score']))
-    #     document_xml = document_xml.replace('%s3c%', str(d['detail']['report_data']['msg']['ChartSelfImage_Indicator'][3]['score']))
-    #
-    #     document_xml = document_xml.replace('%yd%', str(d['detail']['report_data']['msg']['ChartBR_UnderStress_Indicator'][0]['score']))
-    #     document_xml = document_xml.replace('%yi%', str(d['detail']['report_data']['msg']['ChartBR_UnderStress_Indicator'][1]['score']))
-    #     document_xml = document_xml.replace('%ys%', str(d['detail']['report_data']['msg']['ChartBR_UnderStress_Indicator'][2]['score']))
-    #     document_xml = document_xml.replace('%yc%', str(d['detail']['report_data']['msg']['ChartBR_UnderStress_Indicator'][3]['score']))
-    #
-    #     document_xml = document_xml.replace('%wd%', str(d['detail']['report_data']['msg']['ChartWorkMask_Indicator'][0]['score']))
-    #     document_xml = document_xml.replace('%wi%', str(d['detail']['report_data']['msg']['ChartWorkMask_Indicator'][1]['score']))
-    #     document_xml = document_xml.replace('%ws%', str(d['detail']['report_data']['msg']['ChartWorkMask_Indicator'][2]['score']))
-    #     document_xml = document_xml.replace('%wc%', str(d['detail']['report_data']['msg']['ChartWorkMask_Indicator'][3]['score']))
-    #
-    #     path = dstResDir + 'word/document.xml'
-    #     # 写入修改后的word/document.xml
-    #     with open(path, 'w', encoding="UTF-8") as f:
-    #         f.write(document_xml)
-    #
-    #     if len(pp_template_list) == 0:
-    #         pp_template_list.append(disc())
-    #         print("测试解析次数")
-    #     pp = pp_template_list[0]
-    #     # 写入修改后的word/charts/chart1.xml
-    #     name_self_D = "最像我-最不像我" + 'D'
-    #     name_self_I = "最像我-最不像我" + 'I'
-    #     name_self_S = "最像我-最不像我" + 'S'
-    #     name_self_C = "最像我-最不像我" + 'C'
-    #
-    #     e0 = ''
-    #     e1 = ''
-    #     e2 = ''
-    #     e3 = ''
-    #
-    #     for di in pp:
-    #         if di['name'] == name_self_D and str(di['index']) == str(d['detail']['report_data']['msg']['ChartSelfImage_Indicator'][0]['score']):
-    #             e0 = e0 + str(di['contrast'])
-    #         if di['name'] == name_self_I and str(di['index']) == str(d['detail']['report_data']['msg']['ChartSelfImage_Indicator'][1]['score']):
-    #             e1 = e1 + str(di['contrast'])
-    #         if di['name'] == name_self_S and str(di['index']) == str(d['detail']['report_data']['msg']['ChartSelfImage_Indicator'][2]['score']):
-    #             e2 = e2 + str(di['contrast'])
-    #         if di['name'] == name_self_C and str(di['index']) == str(d['detail']['report_data']['msg']['ChartSelfImage_Indicator'][3]['score']):
-    #             e3 = e3 + str(di['contrast'])
-    #     print('e:',e0,e1,e2,e3)
-    #     chart1 = b1.replace('%id0%', str(e0))
-    #     chart1 = chart1.replace('%id1%', str(e1))
-    #     chart1 = chart1.replace('%id2%', str(e2))
-    #     chart1 = chart1.replace('%id3%', str(e3))
-    #     # chart1 = chart1.replace('%id4%', str(d['detail']['report_data']['msg']['ChartDataModel'][4]['score']))
-    #     path1 = dstResDir + 'word/charts/chart1.xml'
-    #     with open(path1, 'w', encoding="UTF-8") as f:
-    #         f.write(chart1)
-    #
-    #     # 写入修改后的word/charts/chart2.xml
-    #     name_worker_D = "最像我" + 'D'
-    #     name_worker_I = "最像我" + 'I'
-    #     name_worker_S = "最像我" + 'S'
-    #     name_worker_C = "最像我" + 'C'
-    #
-    #     e20 = ''
-    #     e21 = ''
-    #     e22 = ''
-    #     e23 = ''
-    #
-    #     for di in pp:
-    #         if di['name'] == name_worker_D and str(di['index']) == str(d['detail']['report_data']['msg']['ChartWorkMask_Indicator'][0]['score']):
-    #             e20 = e20 + str(di['contrast'])
-    #         if di['name'] == name_worker_I and str(di['index']) == str(d['detail']['report_data']['msg']['ChartWorkMask_Indicator'][1]['score']):
-    #             e21 = e21 + str(di['contrast'])
-    #         if di['name'] == name_worker_S and str(di['index']) == str(d['detail']['report_data']['msg']['ChartWorkMask_Indicator'][2]['score']):
-    #             e22 = e22 + str(di['contrast'])
-    #         if di['name'] == name_worker_C and str(di['index']) == str(d['detail']['report_data']['msg']['ChartWorkMask_Indicator'][3]['score']):
-    #             e23 = e23 + str(di['contrast'])
-    #     print('e2:', e20, e21, e22, e23)
-    #     chart2 = b2.replace('%id0%', str(e20))
-    #     chart2 = chart2.replace('%id1%', str(e21))
-    #     chart2 = chart2.replace('%id2%', str(e22))
-    #     chart2 = chart2.replace('%id3%', str(e23))
-    #     path2 = dstResDir + 'word/charts/chart2.xml'
-    #     with open(path2, 'w', encoding="UTF-8") as f:
-    #         f.write(chart2)
-    #
-    #     # 写入修改后的word/charts/chart3.xml
-    #     name_stress_D = "最不像我" + 'D'
-    #     name_stress_I = "最不像我" + 'I'
-    #     name_stress_S = "最不像我" + 'S'
-    #     name_stress_C = "最不像我" + 'C'
-    #
-    #     e30 = ''
-    #     e31 = ''
-    #     e32 = ''
-    #     e33 = ''
-    #
-    #     for di in pp:
-    #         if di['name'] == name_stress_D and str(di['index']) == str(d['detail']['report_data']['msg']['ChartBR_UnderStress_Indicator'][0]['score']):
-    #             e30 = e30 + str(di['contrast'])
-    #         if di['name'] == name_stress_I and str(di['index']) == str(d['detail']['report_data']['msg']['ChartBR_UnderStress_Indicator'][1]['score']):
-    #             e31 = e31 + str(di['contrast'])
-    #         if di['name'] == name_stress_S and str(di['index']) == str(d['detail']['report_data']['msg']['ChartBR_UnderStress_Indicator'][2]['score']):
-    #             e32 = e32 + str(di['contrast'])
-    #         if di['name'] == name_stress_C and str(di['index']) == str(d['detail']['report_data']['msg']['ChartBR_UnderStress_Indicator'][3]['score']):
-    #             e33 = e33 + str(di['contrast'])
-    #     print('e3:', e30, e31, e32, e33)
-    #     chart3 = b3.replace('%id0%', str(e30))
-    #     chart3 = chart3.replace('%id1%', str(e31))
-    #     chart3 = chart3.replace('%id2%', str(e32))
-    #     chart3 = chart3.replace('%id3%', str(e33))
-    #     path3 = dstResDir + 'word/charts/chart3.xml'
-    #     with open(path3, 'w', encoding="UTF-8") as f:
-    #         f.write(chart3)
-    #
-    #     # 写入修改后的word/charts/chart4.xml
-    #     name_self_D = "最像我-最不像我" + 'D'
-    #     name_self_I = "最像我-最不像我" + 'I'
-    #     name_self_S = "最像我-最不像我" + 'S'
-    #     name_self_C = "最像我-最不像我" + 'C'
-    #
-    #     e0 = ''
-    #     e1 = ''
-    #     e2 = ''
-    #     e3 = ''
-    #
-    #     for di in pp:
-    #         if di['name'] == name_self_D and str(di['index']) == str(d['detail']['report_data']['msg']['ChartSelfImage_Indicator'][0]['score']):
-    #             e0 = e0 + str(di['contrast'])
-    #         if di['name'] == name_self_I and str(di['index']) == str(d['detail']['report_data']['msg']['ChartSelfImage_Indicator'][1]['score']):
-    #             e1 = e1 + str(di['contrast'])
-    #         if di['name'] == name_self_S and str(di['index']) == str(d['detail']['report_data']['msg']['ChartSelfImage_Indicator'][2]['score']):
-    #             e2 = e2 + str(di['contrast'])
-    #         if di['name'] == name_self_C and str(di['index']) == str(d['detail']['report_data']['msg']['ChartSelfImage_Indicator'][3]['score']):
-    #             e3 = e3 + str(di['contrast'])
-    #     print('e:', e0, e1, e2, e3)
-    #     chart4 = b4.replace('%id0%', str(e0))
-    #     chart4 = chart4.replace('%id1%', str(e1))
-    #     chart4 = chart4.replace('%id2%', str(e2))
-    #     chart4 = chart4.replace('%id3%', str(e3))
-    #     path4 = dstResDir + 'word/charts/chart4.xml'
-    #     with open(path4, 'w', encoding="UTF-8") as f:
-    #         f.write(chart4)
-    #
-    #     print(dstResDir)
-    #     root_path = r'word_parse\\%s\\%s\\' % (t, people_result_id)
-    #     base_name = os.path.join(root_path, "%s-%s报告-%s" % (d['detail']['report_data']['msg']['Name'],d['detail']['report_data']['report_type'],str(int(time.time() * 100000))))
-    #     # base_name = os.path.join(root_path, "%s-%s报告-%s" % ('叶叶叶', "职业个性", str(int(time.time() * 100000))))
-    #     shutil.make_archive(base_name, 'zip', os.path.join(root_path, 'ProfessionalPpersonalit'))
-    #     if os.path.exists(base_name + ".docx"):
-    #         pass
-    #     else:
-    #         os.rename(base_name + ".zip", base_name + ".docx")
-    #
-    #         word_and_pdf_path = dstResDir.replace("/%s/" % word_id,'')
-    #         print(word_and_pdf_path)
-    #         word_path = word_path = word_to_pdf(word_and_pdf_path)
-    #     return word_path
 
     if word_id == 'WorkValueQuestionnaire':
         # sourceResDir = os.getcwd() + os.sep + "%s/" % word_id
@@ -18869,27 +18634,6 @@ def parse_data(word_id, d, people_result_id):
         chart1 = chart1.replace('%id11%', str(5+int(d['detail']['report_data']['msg']['ChartDataModel'][11]['score'])))
         chart1 = chart1.replace('%id12%', str(5+int(d['detail']['report_data']['msg']['ChartDataModel'][12]['score'])))
         chart1 = chart1.replace('%id13%', str(5+int(d['detail']['report_data']['msg']['ChartDataModel'][13]['score'])))
-        # # 写入颜色值
-        # cid0 = int(d['detail']['report_data']['msg']['ChartDataModel'][0]['score']) + 5
-        # cid1 = int(d['detail']['report_data']['msg']['ChartDataModel'][0]['score']) + 5
-        # cid2 = int(d['detail']['report_data']['msg']['ChartDataModel'][0]['score']) + 5
-        # cid3 = int(d['detail']['report_data']['msg']['ChartDataModel'][0]['score']) + 5
-        # cid4 = int(d['detail']['report_data']['msg']['ChartDataModel'][0]['score']) + 5
-        # cid5 = int(d['detail']['report_data']['msg']['ChartDataModel'][0]['score']) + 5
-        # cid6 = int(d['detail']['report_data']['msg']['ChartDataModel'][0]['score']) + 5
-        # cid7 = int(d['detail']['report_data']['msg']['ChartDataModel'][0]['score']) + 5
-        # cid8 = int(d['detail']['report_data']['msg']['ChartDataModel'][0]['score']) + 5
-        # cid9 = int(d['detail']['report_data']['msg']['ChartDataModel'][0]['score']) + 5
-        # cid10 = int(d['detail']['report_data']['msg']['ChartDataModel'][0]['score']) + 5
-        # cid11 = int(d['detail']['report_data']['msg']['ChartDataModel'][0]['score']) + 5
-        # cid12 = int(d['detail']['report_data']['msg']['ChartDataModel'][0]['score']) + 5
-        # cid13 = int(d['detail']['report_data']['msg']['ChartDataModel'][0]['score']) + 5
-        # cid_list = [cid0, cid1, cid2, cid3, cid4, cid5, cid6, cid7, cid8, cid9, cid10, cid11, cid12, cid13, ]
-        # for cid in cid_list:
-        #     if 0 <= cid <= 1:
-        #         chart1 = chart1.replace('%cid0%', str(5+int(d['detail']['report_data']['msg']['ChartDataModel'][13]['score'])))
-        #
-
 
         # 写入颜色值
         cid0 = int(d['detail']['report_data']['msg']['ChartDataModel'][13]['score']) + 5
@@ -23834,6 +23578,7 @@ def parse_data(word_id, d, people_result_id):
             if di['name'] == name_self_C and str(di['index']) == str(
                     d['detail']['report_data']['msg']['ChartSelfImage_Indicator'][3]['score']):
                 e3 = e3 + str(di['contrast'])
+
         print('e:', e0, e1, e2, e3)
         chart4 = b4.replace('%id0%', str(e0))
         chart4 = chart4.replace('%id1%', str(e1))
@@ -23867,14 +23612,21 @@ def parse_data(word_id, d, people_result_id):
             document_xml = document_xml.replace('%ContentCommunicationStyle%', '暂无')
         document_xml = document_xml.replace('%ContentCommunicationStyle%', disc_parse(d1)[3])
 
-        document_xml = document_xml.replace('%sd%', str(
-            disc_extent(sorce_transform_D)))
-        document_xml = document_xml.replace('%si%', str(
-            disc_extent(sorce_transform_I)))
-        document_xml = document_xml.replace('%ss%', str(
-            disc_extent(sorce_transform_S)))
-        document_xml = document_xml.replace('%sc%', str(
-            disc_extent(sorce_transform_C)))
+        #Modified by gujc 20190326 STA
+        # chart1 score is replaced by the sta score 
+        # document_xml = document_xml.replace('%sd%', str(
+        #     disc_extent(sorce_transform_D)))
+        # document_xml = document_xml.replace('%si%', str(
+        #     disc_extent(sorce_transform_I)))
+        # document_xml = document_xml.replace('%ss%', str(
+        #     disc_extent(sorce_transform_S)))
+        # document_xml = document_xml.replace('%sc%', str(
+        #     disc_extent(sorce_transform_C)))
+        document_xml = document_xml.replace('%sd%', str(d['detail']['report_data']['msg']['ChartSelfImage_Indicator'][0]['score']))
+        document_xml = document_xml.replace('%si%', str(d['detail']['report_data']['msg']['ChartSelfImage_Indicator'][1]['score']))
+        document_xml = document_xml.replace('%ss%', str(d['detail']['report_data']['msg']['ChartSelfImage_Indicator'][2]['score']))
+        document_xml = document_xml.replace('%sc%', str(d['detail']['report_data']['msg']['ChartSelfImage_Indicator'][3]['score']))
+        #Modified by gujc 20190326 END
 
         document_xml = document_xml.replace('%s3d%', str(d['detail']['report_data']['msg']['ChartSelfImage_Indicator'][0]['score']))
         document_xml = document_xml.replace('%s3i%', str(d['detail']['report_data']['msg']['ChartSelfImage_Indicator'][1]['score']))
@@ -25717,22 +25469,16 @@ def parse_data(word_id, d, people_result_id):
         print('拷贝资源文件夹结束！\n')
         document_xml = WORD_DOCUMENT_MAP[word_id]
         document_xml = document_xml.replace('%n%', d['detail']['report_data']['msg']['Name'])
-        # document_xml = document_xml.replace('%n%', '叶叶叶')
-        document_xml = document_xml.replace('%s%', d['detail']['report_data']['msg']['Sex'])
-        # document_xml = document_xml.replace('%s%', '男')
-        document_xml = document_xml.replace('%a%', d['detail']['report_data']['msg']['Age'])
-        # document_xml = document_xml.replace('%a%', str(20))
+        document_xml = document_xml.replace('%s%', d['detail']['report_data']['msg']['Sex'])        
+        document_xml = document_xml.replace('%a%', d['detail']['report_data']['msg']['Age'])        
         document_xml = document_xml.replace('%t%', d['detail']['report_data']['msg']['TestTime'])
-        # ys_list = ['优势1','优势2','优势3']
-        # ss_list = ['劣势1','劣势2','劣势3']
         ls_zp = []
         for i in d['detail']['report_data']['msg']['chart11']:
             ls_zp.append([i['name'],i['score']])
         zp_ls = sorted(ls_zp, key=itemgetter(1), reverse=True)
         print('自评分值：',zp_ls)
         ys_list = [zp_ls[0][0], zp_ls[1][0], zp_ls[2][0]]
-        ss_list = [zp_ls[7][0], zp_ls[8][0], zp_ls[9][0]]
-        # document_xml = document_xml.replace('%t%', '2018.12.18')
+        ss_list = [zp_ls[7][0], zp_ls[8][0], zp_ls[9][0]]        
         document_xml = document_xml.replace('%ys1%', ys_list[0])
         document_xml = document_xml.replace('%ys2%', ys_list[1])
         document_xml = document_xml.replace('%ys3%', ys_list[2])
@@ -25852,15 +25598,11 @@ def parse_data(word_id, d, people_result_id):
         document_xml = document_xml.replace('%ls1%', zp_ls[7][0])
         document_xml = document_xml.replace('%ls2%', zp_ls[8][0])
         document_xml = document_xml.replace('%ls3%', zp_ls[9][0])
-        # print('自评劣势：', zp_ls[7][0], zp_ls[8][0], zp_ls[9][0])
         ls_tp = []
-        # for i in d['detail']['report_data']['msg']['chart1']:
         for i in d['detail']['report_data']['msg']['chart12']:
             ls_tp.append([i['name'], i['score']])
         tp_ls = sorted(ls_tp, key=itemgetter(1), reverse=True)
 
-        # tp_ys_list = [tp_ls[0][0], tp_ls[1][0], tp_ls[2][0]]
-        # tp_ss_list = [tp_ls[7][0], tp_ls[8][0], tp_ls[9][0]]
         print('他评分值：',tp_ls)
         tpys11 = ''
         if tp_ls[0][1] > 4:
@@ -25901,10 +25643,6 @@ def parse_data(word_id, d, people_result_id):
                 tpls11 = tpls11 + tp_ls[9][0]
 
         document_xml = document_xml.replace('%tpls1%', tpls11)
-
-        # document_xml = document_xml.replace('%tpls1%', str(2))
-        # document_xml = document_xml.replace('%tpls2%', str(2))
-        # document_xml = document_xml.replace('%tpls3%', str(2))
 
         document_xml = document_xml.replace('%jy1%', zp_ls[7][0])
         document_xml = document_xml.replace('%jy2%', zp_ls[8][0])

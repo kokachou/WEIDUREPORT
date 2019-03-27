@@ -98,7 +98,7 @@ def parse_data(word_id, d, people_result_id):
         document_xml = document_xml.replace('%Validation%', d['detail']['report_data']['msg']['Validation'])
         document_xml = document_xml.replace('%ContentAdvantageFeature%', d['detail']['report_data']['msg']['ContentAdvantageFeature'])
         document_xml = document_xml.replace('%ContentWeakFeature%', d['detail']['report_data']['msg']['ContentWeakFeature'])
-        document_xml = document_xml.replace('%jinqu%', d['detail']['report_data']['msg']['ContentMotivationdDescription'][0]['Aggressive']))
+        document_xml = document_xml.replace('%jinqu%', d['detail']['report_data']['msg']['ContentMotivationdDescription'][0]['Aggressive'])
         document_xml = document_xml.replace('%zhipei%', d['detail']['report_data']['msg']['ContentMotivationdDescription'][1]['Dominance'])
         document_xml = document_xml.replace('%qinhe%', d['detail']['report_data']['msg']['ContentMotivationdDescription'][2]['Affinity'])
         document_xml = document_xml.replace('%kaifang%', d['detail']['report_data']['msg']['ChartDataCognitionDescription'][0]['Openness'])        
